@@ -6,14 +6,20 @@ Note sleep notification to Misskey:bell:
 
 ### Linux
 
-1. Create user
+1. Add requirement
+
+   ```bash
+   npm install -g pnpm
+   ```
+
+2. Create user
 
    ```bash
    adduser ps-notifier
    usermod -aG sudo ps-notifier
    ```
 
-2. Clone repository
+3. Clone repository
 
    ```bash
    cd /home/ps-notifier
@@ -27,19 +33,23 @@ Note sleep notification to Misskey:bell:
    cd ./sleep-notifier-bot
    ```
 
-3. Copy `./resource/.env.sample` to `./.env` and Fix settings.
+   ```bash
+   pnpm install
+   ```
+
+4. Copy `./resource/.env.sample` to `./.env` and Fix settings.
 
    ```bash
    cp ./resource/.env.sample ./.env
    ```
 
-4. Set TimeZone
+5. Set TimeZone
 
    ```bash
    ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
    ```
 
-5. Start Service
+6. Start Service
 
    ```bash
    sudo systemctl start ps-notifier.service
