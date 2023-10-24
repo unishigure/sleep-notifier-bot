@@ -1,6 +1,5 @@
 {
   "name": "sleep-notifier-bot",
-  "type": "module",
   "scripts": {
     "up": "docker-compose up -d",
     "down": "docker-compose down --rmi all -v",
