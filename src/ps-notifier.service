@@ -1,0 +1,14 @@
+[Unit]
+Description=Sleep notifier to Misskey
+
+[Service]
+Type=simple
+User=ps-notifier
+WorkingDirectory=/home/ps-notifier/sleep-notifier-bot
+ExecStart=/usr/local/bin/pnpm tsx /home/ps-notifier/sleep-notifier-bot/src/cron.ts
+ExecStop=/usr/bin/pkill -e node
+Restart=always
+RestartSec=2
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ps-notifier
