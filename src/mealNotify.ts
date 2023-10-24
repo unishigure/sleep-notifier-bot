@@ -1,5 +1,11 @@
 import "dotenv/config";
 
+import note from "./note";
+
+const visibility = process.env.MEAL_VISIBLE
+  ? process.env.MEAL_VISIBLE
+  : "specified";
+
 const morningStMsg = process.env.MORNING_START
   ? process.env.MORNING_START
   : "Start Morning";
@@ -20,66 +26,25 @@ const dinnerEdMsg = process.env.DINNER_END
   : "End Dinner soon";
 
 export function startMorning() {
-  note(morningStMsg);
+  note(morningStMsg, visibility);
 }
 
 export function warnMorning() {
-  note(morningEdMsg);
+  note(morningEdMsg, visibility);
 }
 
 export function startLunch() {
-  note(lunchStMsg);
+  note(lunchStMsg, visibility);
 }
 
 export function warnLunch() {
-  note(lunchEdMsg);
+  note(lunchEdMsg, visibility);
 }
 
 export function startDinner() {
-  note(dinnerStMsg);
+  note(dinnerStMsg, visibility);
 }
 
 export function warnDinner() {
-  note(dinnerEdMsg);
-}
-
-async function note(text: string) {
-  console.log(`${new Date()}:\n${text}`);
-
-  const token = process.env.token ? process.env.token : null;
-  const visible = process.env.visible ? process.env.visible : "specified";
-  const instance = process.env.instance
-    ? process.env.instance
-    : "https://example.org/";
-
-  if (token === null) {
-    console.error("Missing token. Set token={Your Misskey Token}");
-    return;
-  } else if (instance === null) {
-    console.error(
-      "Missing instance.\n",
-      "Set instance={Your Misskey Instance. e.g. https://example.com}"
-    );
-    return;
-  }
-
-  let url = new URL("/");
-  try {
-    url = new URL("/api/notes/create", instance);
-  } catch (e: any) {
-    console.error(`${new Date()}: Failed parse URL. ${e}`);
-  }
-
-  const headers = new Headers();
-  headers.append("Content-Type", "application/json");
-  const request = new Request(url, {
-    method: "POST",
-    headers: headers,
-    body: `{"i": "${token}", "text": "${text}", "visibility": "${visible}"}`,
-  });
-
-  const response = await fetch(request);
-  if (!response.ok) {
-    console.error(`${new Date()}: ${response.status} ${response.statusText}`);
-  }
+  note(dinnerEdMsg, visibility);
 }
