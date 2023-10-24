@@ -2,6 +2,9 @@
   "name": "sleep-notifier-bot",
   "type": "module",
   "scripts": {
+    "up": "docker-compose up -d",
+    "down": "docker-compose down --rmi all -v",
+    "exec": "docker exec -it ps-notifier /bin/bash",
     "test": "tsx src/cron.ts",
     "news-test": "tsx src/newsNotify.ts"
   },
