@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 export default async function note(
   text: string,
   visibility: string = "specified"
@@ -22,7 +24,7 @@ export default async function note(
     return;
   }
 
-  let url = new URL("/");
+  let url = new URL("https://example.org/");
   try {
     url = new URL("/api/notes/create", instance);
   } catch (e: any) {
