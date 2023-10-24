@@ -1,6 +1,5 @@
 import { schedule } from "node-cron";
 
-import newsNotify from "./newsNotify.js";
 import {
   startMorning,
   warnMorning,
@@ -9,6 +8,7 @@ import {
   startDinner,
   warnDinner,
 } from "./mealNotify.js";
+import newsNotify from "./newsNotify.js";
 
 console.log(`${new Date()}: Start node-cron`);
 

@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-import note from "./note";
+import note from "./note.js";
 
 const visibility = process.env.MEAL_VISIBLE
   ? process.env.MEAL_VISIBLE

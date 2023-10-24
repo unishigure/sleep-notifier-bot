@@ -1,6 +1,8 @@
 {
   "name": "sleep-notifier-bot",
+  "type": "module",
   "scripts": {
+    "build": "pnpm tsc",
     "up": "docker-compose up -d",
     "down": "docker-compose down --rmi all -v",
     "exec": "docker exec -it ps-notifier /bin/bash",
@@ -14,7 +16,6 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.3.1",
-    "feed": "^4.2.2",
     "node-cron": "^3.0.2",
     "tsx": "^3.14.0"
   },
