@@ -92,6 +92,10 @@ Note sleep notification to Misskey:bell:
 - Display log
 
   ```bash
+  sudo journalctl -u ps-notifier
+  ```
+
+  ```bash
   nano /var/log/journal/ps-notifier.service.log
   ```
 
