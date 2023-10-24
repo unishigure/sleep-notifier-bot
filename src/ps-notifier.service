@@ -12,3 +12,6 @@ RestartSec=2
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=ps-notifier
+
+[Install]
+WantedBy=multi-user.target

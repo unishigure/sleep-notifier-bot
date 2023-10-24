@@ -22,6 +22,7 @@ Note sleep notification to Misskey:bell:
 3. Clone repository
 
    ```bash
+   sudo su - ps-notifier
    cd /home/ps-notifier
    ```
 
@@ -46,10 +47,15 @@ Note sleep notification to Misskey:bell:
 5. Set TimeZone
 
    ```bash
-   ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+   sudo ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
    ```
 
 6. Start Service
+
+   ```bash
+   sudo cp /home/ps-notifier/sleep-notifier-bot/src/ps-notifier.service \
+      /etc/systemd/system/ps-notifier.service
+   ```
 
    ```bash
    sudo systemctl start ps-notifier.service
