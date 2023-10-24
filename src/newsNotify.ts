@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { type } from "arktype";
 
 import note from "./note.js";
 
@@ -9,10 +10,28 @@ const visibility = process.env.NEWS_VISIBLE
   ? process.env.NEWS_VISIBLE
   : "specified";
 
-function getRss() {}
+const rss = type([]);
+
+function adjustRss(): void {}
+
+function getRss(): void {
+  adjustRss();
+}
+
+function diffCheck(): boolean {
+  return false;
+}
+
+function createNote(): string {
+  return "";
+}
 
 export default function newsNotify() {
-  // TODO
-  console.log(`${new Date()}: News notification!`);
-  note("Search RSS timing");
+  console.log(`${new Date()}: Start to check update news.`);
+  getRss();
+  if (diffCheck()) {
+    const text = createNote();
+    // note(text, visibility);
+  }
+  console.log(`${new Date()}: End to check update news.`);
 }
