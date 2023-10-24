@@ -1,5 +1,7 @@
 import "dotenv/config";
 
+import note from "./note.js";
+
 const rootUrl = "https://www.pokemonsleep.net";
 const feedUrl = new URL("/news/feed", rootUrl);
 
@@ -12,4 +14,5 @@ function getRss() {}
 export default function newsNotify() {
   // TODO
   console.log(`${new Date()}: News notification!`);
+  note("Search RSS timing");
 }
