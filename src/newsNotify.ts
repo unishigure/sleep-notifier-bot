@@ -78,7 +78,7 @@ function createNote(feed: { [key: string]: any } & Parser.Item) {
   const link = feed.link;
 
   const text =
-    `📣 新しいニュースが届きました！\\n\\n` + `${title}\\n` + `${link}`;
+    `📣 新しいニュースが届きました！\n\n` + `${title}\n` + `${link}`;
   return text;
 }
 
