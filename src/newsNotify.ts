@@ -1,7 +1,6 @@
 import * as fs from "fs/promises";
 
 import "dotenv/config";
-import { Type, type } from "arktype";
 import Parser from "rss-parser";
 
 import note from "./note.js";
@@ -13,15 +12,6 @@ const visibility = process.env.NEWS_VISIBLE
   : "specified";
 
 const parser: Parser = new Parser();
-
-const feed: Type = type([
-  {
-    title: "string",
-    link: "string",
-    pubDate: "Date",
-    imsSrc: "string",
-  },
-]);
 
 async function adjustXml() {
   console.log("Start adjust xml.");
@@ -42,6 +32,7 @@ async function adjustXml() {
 }
 
 async function getFeed() {
+  await adjustXml();
   console.log("Start fetch Feed.");
   const response = await fetch(FEED_URL).catch((error) => {
     console.error("Fetch failure.");
@@ -63,23 +54,47 @@ async function getFeed() {
   console.log("End fetch Feed.");
 }
 
-async function diffCheck() {
-  // const feed = parser.parseURL("./feed/latestFeed.xml");
+async function getNewFeed() {
+  const currentXml = (
+    await fs.readFile("./feed/currentFeed.xml", "utf-8")
+  ).toString();
+  const currentFeed = (await parser.parseString(currentXml)).items;
+  const lastDate = new Date(
+    currentFeed[0].pubDate ? currentFeed[0].pubDate : ""
+  );
 
-  return false;
+  const latestXml = (
+    await fs.readFile("./feed/latestFeed.xml", "utf-8")
+  ).toString();
+  const latestFeed = (await parser.parseString(latestXml)).items;
+
+  const newFeeds = latestFeed.filter((feed) => {
+    const pubDate = new Date(feed.pubDate ? feed.pubDate : "");
+    if (pubDate > lastDate && pubDate != lastDate) return feed;
+  });
+
+  return newFeeds;
 }
 
-function createNote(): string {
-  return "";
+function createNote(feed: { [key: string]: any } & Parser.Item) {
+  const title = feed.title;
+  const link = feed.link;
+
+  const text = `📣 新しいニュースが届きました！\\n\\n` + `${title}\\n` + `${link}\\n`;
+  return text;
 }
 
 export default async function newsNotify() {
   console.log("Start to check update news.");
-  await adjustXml();
   await getFeed();
-  if (await diffCheck()) {
-    const text = createNote();
-    note(text, visibility);
+  const feed = await getNewFeed();
+  if (feed.length > 0) {
+    feed.forEach((f) => {
+      const text = createNote(f);
+      note(text, visibility);
+    });
+  } else {
+    console.log("New news not exists.");
   }
   console.log("End to check update news.");
 }

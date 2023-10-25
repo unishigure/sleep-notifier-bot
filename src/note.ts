@@ -40,7 +40,10 @@ export default async function note(
 
   const response = await fetch(request);
   if (!response.ok) {
-    console.error(`${response.status} : ${response.statusText}`);
+    console.error(
+      `${response.status} : ${response.statusText}\n` +
+        `Instance: ${instance}, Visibility: ${visibility}`
+    );
   } else {
     console.log("Note Success.");
   }
