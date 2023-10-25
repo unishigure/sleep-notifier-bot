@@ -34,7 +34,7 @@ export default async function note(
   headers.append("Content-Type", "application/json");
   const body = {
     i: token,
-    text: text,
+    text: `${text}`,
     visibility: visibility,
   };
   const request = new Request(url, {
