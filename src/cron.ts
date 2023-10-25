@@ -10,7 +10,7 @@ import {
 } from "./mealNotify.js";
 import newsNotify from "./newsNotify.js";
 
-console.log(`${new Date()}: Start node-cron`);
+console.log("Start node-cron");
 
 schedule("0 */15 * * * *", () => newsNotify());
 
