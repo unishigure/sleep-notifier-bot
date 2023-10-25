@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  arktype:
-    specifier: 1.0.25-alpha
-    version: 1.0.25-alpha
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
@@ -241,10 +238,6 @@ packages:
     dependencies:
       undici-types: 5.25.3
     dev: true
-
-  /arktype@1.0.25-alpha:
-    resolution: {integrity: sha512-kpRKVgqL+9jDjU3MpnYmKSRsutS1wo39Pb0VPOFWyWc9KOcN1BTqdaWPvCT/12x8jgomZdw3leemOIUpQChOPw==}
-    dev: false
 
   /buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
