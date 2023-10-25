@@ -10,7 +10,7 @@ export default async function note(
   text: string,
   visibility: string = "specified"
 ) {
-  console.log(`Text: ${text}`);
+  console.log(`Text: ${fixLineBreak(text)}`);
 
   const token = process.env.TOKEN ? process.env.TOKEN : null;
   const instance = process.env.INSTANCE
