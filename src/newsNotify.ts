@@ -16,18 +16,18 @@ const parser: Parser = new Parser();
 async function adjustXml() {
   await fs
     .mkdir("./feed")
-    .then(() => console.log("Create feed directory success."))
-    .catch(() => console.log("feed directory already exists."));
+    .then(() => console.debug("Create feed directory success."))
+    .catch(() => console.debug("feed directory already exists."));
   await fs
     .unlink("./feed/currentFeed.xml")
-    .then(() => console.log("Delete currentFeed.xml success."))
-    .catch(() => console.log("currentFeed.xml not exists."));
+    .then(() => console.debug("Delete currentFeed.xml success."))
+    .catch(() => console.debug("currentFeed.xml not exists."));
   await fs
     .rename("./feed/latestFeed.xml", "./feed/currentFeed.xml")
     .then(() =>
-      console.log("Rename latestFeed.xml to currentFeed.xml success.")
+      console.debug("Rename latestFeed.xml to currentFeed.xml success.")
     )
-    .catch(() => console.log("latestFeed.xml not exists."));
+    .catch(() => console.debug("latestFeed.xml not exists."));
 }
 
 async function getFeed() {
@@ -77,8 +77,7 @@ function createNote(feed: { [key: string]: any } & Parser.Item) {
   const title = feed.title;
   const link = feed.link;
 
-  const text =
-    `📣 新しいニュースが届きました！\n\n` + `${title}\n` + `${link}`;
+  const text = `📣 新しいニュースが届きました！\n\n` + `${title}\n` + `${link}`;
   return text;
 }
 
