@@ -14,7 +14,6 @@ const visibility = process.env.NEWS_VISIBLE
 const parser: Parser = new Parser();
 
 async function adjustXml() {
-  console.log("Start adjust xml.");
   await fs
     .mkdir("./feed")
     .then(() => console.log("Create feed directory success."))
@@ -33,7 +32,6 @@ async function adjustXml() {
 
 async function getFeed() {
   await adjustXml();
-  console.log("Start fetch Feed.");
   const response = await fetch(FEED_URL).catch((error) => {
     console.error("Fetch failure.");
     throw error;
@@ -51,7 +49,6 @@ async function getFeed() {
     console.error(`${response.status} : ${response.statusText}`);
     throw Error;
   }
-  console.log("End fetch Feed.");
 }
 
 async function getNewFeed() {
@@ -83,6 +80,11 @@ function createNote(feed: { [key: string]: any } & Parser.Item) {
   const text =
     `📣 新しいニュースが届きました！\\n\\n` + `${title}\\n` + `${link}\\n`;
   return text;
+}
+
+export function init() {
+  console.log("Init XML.");
+  getFeed();
 }
 
 export default async function newsNotify() {

@@ -8,9 +8,10 @@ import {
   startDinner,
   warnDinner,
 } from "./mealNotify.js";
-import newsNotify from "./newsNotify.js";
+import newsNotify, { init } from "./newsNotify.js";
 
 console.log("Start node-cron");
+init();
 
 schedule("0 */15 * * * *", () => newsNotify());
 
