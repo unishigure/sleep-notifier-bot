@@ -1,24 +1,71 @@
+import * as fs from "fs/promises";
+
 import "dotenv/config";
-import { type } from "arktype";
+import { Type, type } from "arktype";
+import Parser from "rss-parser";
 
 import note from "./note.js";
 
-const rootUrl = "https://www.pokemonsleep.net";
-const feedUrl = new URL("/news/feed", rootUrl);
+const FEED_URL = "https://www.pokemonsleep.net/news/feed/";
 
 const visibility = process.env.NEWS_VISIBLE
   ? process.env.NEWS_VISIBLE
   : "specified";
 
-const rss = type([]);
+const parser: Parser = new Parser();
 
-function adjustRss(): void {}
+const feed: Type = type([
+  {
+    title: "string",
+    link: "string",
+    pubDate: "Date",
+    imsSrc: "string",
+  },
+]);
 
-function getRss(): void {
-  adjustRss();
+async function adjustXml() {
+  console.log("Start adjust xml.");
+  await fs
+    .mkdir("./feed")
+    .then(() => console.log("Create feed directory success."))
+    .catch(() => console.log("feed directory already exists."));
+  await fs
+    .unlink("./feed/currentFeed.xml")
+    .then(() => console.log("Delete currentFeed.xml success."))
+    .catch(() => console.log("currentFeed.xml not exists."));
+  await fs
+    .rename("./feed/latestFeed.xml", "./feed/currentFeed.xml")
+    .then(() =>
+      console.log("Rename latestFeed.xml to currentFeed.xml success.")
+    )
+    .catch(() => console.log("latestFeed.xml not exists."));
 }
 
-function diffCheck(): boolean {
+async function getFeed() {
+  console.log("Start fetch Feed.");
+  const response = await fetch(FEED_URL).catch((error) => {
+    console.error("Fetch failure.");
+    throw error;
+  });
+  if (response.ok) {
+    const text = await response.text();
+    await fs
+      .writeFile("./feed/latestFeed.xml", text)
+      .then(() => console.log("Create latestFeed.xml success."))
+      .catch((error) => {
+        console.error("Write XML failure.");
+        throw error;
+      });
+  } else {
+    console.error(`${response.status} : ${response.statusText}`);
+    throw Error;
+  }
+  console.log("End fetch Feed.");
+}
+
+async function diffCheck() {
+  // const feed = parser.parseURL("./feed/latestFeed.xml");
+
   return false;
 }
 
@@ -26,12 +73,15 @@ function createNote(): string {
   return "";
 }
 
-export default function newsNotify() {
-  console.log(`${new Date()}: Start to check update news.`);
-  getRss();
-  if (diffCheck()) {
+export default async function newsNotify() {
+  console.log("Start to check update news.");
+  await adjustXml();
+  await getFeed();
+  if (await diffCheck()) {
     const text = createNote();
-    // note(text, visibility);
+    note(text, visibility);
   }
-  console.log(`${new Date()}: End to check update news.`);
+  console.log("End to check update news.");
 }
+
+newsNotify();

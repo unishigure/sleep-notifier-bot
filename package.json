@@ -18,6 +18,7 @@
     "arktype": "1.0.25-alpha",
     "dotenv": "^16.3.1",
     "node-cron": "^3.0.2",
+    "rss-parser": "^3.13.0",
     "tsx": "^3.14.0"
   },
   "devDependencies": {
