@@ -80,7 +80,8 @@ function createNote(feed: { [key: string]: any } & Parser.Item) {
   const title = feed.title;
   const link = feed.link;
 
-  const text = `📣 新しいニュースが届きました！\\n\\n` + `${title}\\n` + `${link}\\n`;
+  const text =
+    `📣 新しいニュースが届きました！\\n\\n` + `${title}\\n` + `${link}\\n`;
   return text;
 }
 
@@ -98,5 +99,3 @@ export default async function newsNotify() {
   }
   console.log("End to check update news.");
 }
-
-newsNotify();
