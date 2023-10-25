@@ -32,10 +32,15 @@ export default async function note(
 
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
+  const body = {
+    i: token,
+    text: text,
+    visibility: visibility,
+  };
   const request = new Request(url, {
     method: "POST",
     headers: headers,
-    body: `{"i": "${token}", "text": "${text}", "visibility": "${visibility}"}`,
+    body: JSON.stringify(body),
   });
 
   const response = await fetch(request);
