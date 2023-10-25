@@ -1,4 +1,10 @@
+import os from "node:os";
+
 import "dotenv/config";
+
+function fixLineBreak(text: string) {
+  return text.replace("\\n", os.EOL);
+}
 
 export default async function note(
   text: string,
@@ -34,7 +40,7 @@ export default async function note(
   headers.append("Content-Type", "application/json");
   const body = {
     i: token,
-    text: `${text}`,
+    text: fixLineBreak(text),
     visibility: visibility,
   };
   const request = new Request(url, {
