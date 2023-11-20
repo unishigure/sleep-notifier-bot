@@ -15,8 +15,8 @@ Note sleep notification to Misskey:bell:
 2. Create user
 
    ```bash
-   adduser ps-notifier
-   usermod -aG sudo ps-notifier
+   sudo useradd -m ps-notifier -s /bin/bash -G sudo
+   sudo passwd ps-notifier
    ```
 
 3. Clone repository
