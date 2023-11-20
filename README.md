@@ -44,6 +44,10 @@ Note sleep notification to Misskey:bell:
    cp ./resource/.env.sample ./.env
    ```
 
+   ```bash
+   nano ./.env
+   ```
+
 5. Set TimeZone
 
    ```bash
@@ -88,6 +92,12 @@ Note sleep notification to Misskey:bell:
     ```
 
 ### Optional
+
+- Check connection
+
+  ```bash
+  pnpm test
+  ```
 
 - Display log
 
