@@ -6,7 +6,8 @@
     "up": "docker-compose up -d",
     "down": "docker-compose down --rmi all -v",
     "exec": "docker exec -it ps-notifier /bin/bash",
-    "test": "tsx src/cron.ts",
+    "test": "tsx src/test.ts",
+    "cron-test": "tsx src/cron.ts",
     "news-test": "tsx src/newsNotify.ts"
   },
   "author": {
