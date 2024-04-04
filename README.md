@@ -13,7 +13,7 @@ Note sleep notification to Misskey :bell:
 2. Build Docker Container
 
    ```ps
-   bun run start
+   docker-compose up -d
    ```
 
 ### Optional
