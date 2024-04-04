@@ -21,5 +21,5 @@ Note sleep notification to Misskey :bell:
 - Check connection
 
   ```bash
-  bun run note-test
+  docker exec -it ps-notifier bun run sleep-notifier-bot/src/test.ts
   ```
