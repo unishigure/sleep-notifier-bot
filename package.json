@@ -2,13 +2,10 @@
   "name": "sleep-notifier-bot",
   "type": "module",
   "scripts": {
-    "build": "pnpm tsc",
-    "up": "docker-compose up -d",
+    "start": "docker-compose up -d",
     "down": "docker-compose down --rmi all -v",
     "exec": "docker exec -it ps-notifier /bin/bash",
-    "test": "tsx src/test.ts",
-    "cron-test": "tsx src/cron.ts",
-    "news-test": "tsx src/newsNotify.ts"
+    "note-test": "docker exec -it ps-notifier bun run sleep-notifier-bot/src/test.ts"
   },
   "author": {
     "name": "unishigured",
@@ -18,12 +15,12 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "node-cron": "^3.0.2",
-    "rss-parser": "^3.13.0",
-    "tsx": "^3.14.0"
+    "rss-parser": "^3.13.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.7",
     "@types/node-cron": "^3.0.10",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@types/bun": "latest"
   }
 }

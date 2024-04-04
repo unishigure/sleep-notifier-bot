@@ -1,0 +1,18 @@
+version: "3"
+services:
+  bot:
+    container_name: ps-notifier
+    build: .
+    environment:
+      TZ: ${TZ}
+      INSTANCE: ${INSTANCE}
+      TOKEN: ${TOKEN}
+      NEWS_VISIBLE: ${NEWS_VISIBLE}
+      MEAL_VISIBLE: ${MEAL_VISIBLE}
+      MORNING_START: ${MORNING_START}
+      MORNING_END: ${MORNING_END}
+      LUNCH_START: ${LUNCH_START}
+      LUNCH_END: ${LUNCH_END}
+      DINNER_START: ${DINNER_START}
+      DINNER_END: ${DINNER_END}
+      TEST_MESSAGE: ${TEST_MESSAGE}

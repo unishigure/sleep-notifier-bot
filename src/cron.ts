@@ -13,7 +13,7 @@ import newsNotify, { init } from "./newsNotify.js";
 console.log("Start node-cron");
 init();
 
-schedule("0 */15 * * * *", () => newsNotify());
+schedule("30 */5 * * * *", () => newsNotify());
 
 schedule("0 0 6 * * *", () => startMorning());
 schedule("0 30 11 * * *", () => warnMorning());
