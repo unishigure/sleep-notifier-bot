@@ -77,7 +77,11 @@ function createNote(feed: { [key: string]: any } & Parser.Item) {
   const title = feed.title;
   const link = feed.link;
 
-  const text = `📣 新しいニュースが届きました！\n\n` + `${title}\n` + `${link}`;
+  const text =
+    `📣 新しいニュースが届きました！\n\n` +
+    `${title}\n` +
+    `${link}\n\n` +
+    `#ポケモンスリープ #PokemonSleep`;
   return text;
 }
 
